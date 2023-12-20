@@ -4,6 +4,7 @@ import com.example.recette.bean.Recette;
 import com.example.recette.service.facade.RecetteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -18,7 +19,7 @@ public class RecetteWs {
         return recetteService.findByRef(ref);
     }
 
-    @GetMapping("/user-id/{userId}")
+    @GetMapping("/user-id/{userRef}")
     public List<Recette> findByUserId(@PathVariable String userRef) {
         return recetteService.findByUserRef(userRef);
     }
@@ -38,10 +39,16 @@ public class RecetteWs {
         return recetteService.save(recette);
     }
 
+    @PostMapping("/save")
+    public int save1(@RequestBody Recette recette, List<MultipartFile> imageFiles) {
+        return recetteService.save1(recette, imageFiles);
+    }
+
     @PutMapping("/")
     public int update(@RequestBody Recette recette) {
         return recetteService.update(recette);
     }
+
     @GetMapping("/type-recette/ref/{ref}")
     public List<Recette> findAllByTypeRecetteRef(@PathVariable String ref) {
         return recetteService.findAllByTypeRecetteRef(ref);

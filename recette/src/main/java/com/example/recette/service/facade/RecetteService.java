@@ -1,6 +1,7 @@
 package com.example.recette.service.facade;
 
 import com.example.recette.bean.Recette;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -10,6 +11,7 @@ public interface RecetteService {
     int deleteByRef(String ref);
     List<Recette> findAll();
     int save(Recette recette);
+    int save1(Recette recette,List<MultipartFile> imageFiles);
     int update(Recette recette);
     List<Recette> findAllByTypeRecetteRef(String ref);
 

@@ -1,5 +1,6 @@
 package com.example.recette.service.impl;
 
+import com.example.recette.bean.Image;
 import com.example.recette.bean.Recette;
 import com.example.recette.dao.RecetteDao;
 import com.example.recette.required.UserRequired;
@@ -7,11 +8,15 @@ import com.example.recette.service.facade.ImageService;
 import com.example.recette.service.facade.IngredientService;
 import com.example.recette.service.facade.RecetteService;
 import com.example.recette.service.facade.TypeRecetteService;
+import com.example.recette.util.ImageUtil;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class RecetteServiceImpl implements RecetteService {
@@ -50,9 +55,9 @@ public class RecetteServiceImpl implements RecetteService {
     @Override
     public int save(Recette recette) {
         if (recetteDao.findByRef(recette.getRef()) != null) {
-            if (recette.getImages() != null) {
-                recette.getImages().stream().map(image -> imageService.save(image));
-            }
+//            if (recette.getImages() != null) {
+//                recette.getImages().stream().forEach(image -> imageService.save(image));
+//            }
             if (recette.getIngredients() != null) {
                 recette.getIngredients().stream().map(ingredient -> ingredientService.save(ingredient));
             }
@@ -63,6 +68,38 @@ public class RecetteServiceImpl implements RecetteService {
         }
         return -1;
     }
+@Override
+    public int save1(Recette recette, List<MultipartFile> imageFiles) {
+        if (recetteDao.findByRef(recette.getRef()) != null) {
+            if (imageFiles != null) {
+                List<Image> images = imageFiles.stream()
+                        .map(file -> {
+                            try {
+                                return Image.builder()
+                                        .name(file.getOriginalFilename())
+                                        .imageData(ImageUtil.compressImage(file.getBytes()))
+                                        .build();
+                            } catch (IOException e) {
+                                throw new RuntimeException(e);
+                            }
+                        })
+                        .collect(Collectors.toList());
+
+                recette.setImages(images);
+            }
+
+            if (recette.getIngredients() != null) {
+                recette.getIngredients().forEach(ingredient -> ingredientService.save(ingredient));
+            }
+
+            if (userRequired.findByRef(recette.getUserRef()) != null) {
+                recetteDao.save(recette);
+            }
+            return 1;
+        }
+        return -1;
+    }
+
 
     @Override
     public int update(Recette recette) {
