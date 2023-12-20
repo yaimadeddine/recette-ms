@@ -10,5 +10,7 @@ import java.util.List;
 public interface RecetteDao extends JpaRepository<Recette,Integer> {
     Recette findByRef(String ref);
     int deleteByRef(String ref);
-    List<Recette> findByUserId(int userId);
+    List<Recette> findByUserRef(String userRef);
+    List<Recette> findAllByTypeRecetteRef(String ref);
+
 }

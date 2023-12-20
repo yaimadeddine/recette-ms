@@ -10,8 +10,7 @@ import org.springframework.stereotype.Service;
 public class ImageServiceImpl implements ImageService {
     @Autowired
     private ImageDao imageDao;
-    @Override
-    public int uploadImage() {
+    private int uploadImage() {
         return 0;
     }
     @Override

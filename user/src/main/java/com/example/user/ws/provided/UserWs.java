@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("api/v1/user")
+@RequestMapping("api/user")
 public class UserWs {
     @Autowired
     private UserService userService;
@@ -42,4 +42,5 @@ public class UserWs {
     public int update(@RequestBody User user) {
         return userService.update(user);
     }
+
 }

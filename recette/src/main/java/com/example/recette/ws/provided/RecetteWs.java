@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("api/v1/recette")
+@RequestMapping("api/recette")
 public class RecetteWs {
     @Autowired
     private RecetteService recetteService;
@@ -18,9 +18,9 @@ public class RecetteWs {
         return recetteService.findByRef(ref);
     }
 
-    @GetMapping("/user-id/{user-id}")
-    public List<Recette> findByUserId(@PathVariable int userId) {
-        return recetteService.findByUserId(userId);
+    @GetMapping("/user-id/{userId}")
+    public List<Recette> findByUserId(@PathVariable String userRef) {
+        return recetteService.findByUserRef(userRef);
     }
 
     @DeleteMapping("/ref/{ref}")
@@ -34,12 +34,16 @@ public class RecetteWs {
     }
 
     @PostMapping("/")
-    public int save(Recette recette) {
+    public int save(@RequestBody Recette recette) {
         return recetteService.save(recette);
     }
 
     @PutMapping("/")
-    public int update(Recette recette) {
+    public int update(@RequestBody Recette recette) {
         return recetteService.update(recette);
+    }
+    @GetMapping("/type-recette/ref/{ref}")
+    public List<Recette> findAllByTypeRecetteRef(@PathVariable String ref) {
+        return recetteService.findAllByTypeRecetteRef(ref);
     }
 }
