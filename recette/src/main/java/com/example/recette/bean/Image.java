@@ -13,7 +13,7 @@ import org.hibernate.annotations.Type;
 @NoArgsConstructor
 @Builder
 public class Image {
-    @Id @GeneratedValue(strategy = GenerationType.AUTO)
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String name;
     @Lob

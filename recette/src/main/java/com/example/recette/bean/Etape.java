@@ -13,6 +13,7 @@ public class Etape {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 
     private int id;
+    private String ref;
     private String description;
     private int ordre;
     private int duree;
