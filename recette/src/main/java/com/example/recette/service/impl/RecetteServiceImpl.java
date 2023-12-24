@@ -4,10 +4,7 @@ import com.example.recette.bean.Image;
 import com.example.recette.bean.Recette;
 import com.example.recette.dao.RecetteDao;
 import com.example.recette.required.UserRequired;
-import com.example.recette.service.facade.ImageService;
-import com.example.recette.service.facade.IngredientService;
-import com.example.recette.service.facade.RecetteService;
-import com.example.recette.service.facade.TypeRecetteService;
+import com.example.recette.service.facade.*;
 import com.example.recette.util.ImageUtil;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +25,8 @@ public class RecetteServiceImpl implements RecetteService {
     private RecetteDao recetteDao;
     @Autowired
     private IngredientService ingredientService;
+    @Autowired
+    private EtapeService etapeService;
     @Autowired
     private TypeRecetteService typeRecetteService;
 
@@ -61,6 +60,10 @@ public class RecetteServiceImpl implements RecetteService {
             if (recette.getIngredients() != null) {
                 recette.getIngredients().stream().map(ingredient -> ingredientService.save(ingredient));
             }
+            if (recette.getEtapes() != null) {
+                recette.getEtapes().forEach(etape -> etapeService.save(etape));
+            }
+
             if (userRequired.findByRef(recette.getUserRef()) != null) {
                 recetteDao.save(recette);
             }
@@ -91,6 +94,9 @@ public class RecetteServiceImpl implements RecetteService {
             if (recette.getIngredients() != null) {
                 recette.getIngredients().forEach(ingredient -> ingredientService.save(ingredient));
             }
+            if (recette.getEtapes() != null) {
+                recette.getEtapes().forEach(etape -> etapeService.save(etape));
+            }
 
             if (userRequired.findByRef(recette.getUserRef()) != null) {
                 recetteDao.save(recette);
@@ -113,6 +119,8 @@ public class RecetteServiceImpl implements RecetteService {
             r.setImages(recette.getImages());
             r.setDate_publication(recette.getDate_publication());
             r.setIngredients(recette.getIngredients());
+            r.setEtapes(recette.getEtapes());
+
             r.setTypeRecette(recette.getTypeRecette());
             recetteDao.save(r);
             return 1;
