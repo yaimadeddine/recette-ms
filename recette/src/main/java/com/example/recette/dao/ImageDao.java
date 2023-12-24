@@ -9,6 +9,5 @@ import java.util.List;
 
 @Repository
 public interface ImageDao extends JpaRepository<Image,Integer> {
-    List<Image> findAllByRecette(Recette recette);
     Image findByName(String name);
 }
