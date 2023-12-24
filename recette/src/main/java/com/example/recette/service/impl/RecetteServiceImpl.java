@@ -1,6 +1,5 @@
 package com.example.recette.service.impl;
 
-import com.example.recette.bean.Image;
 import com.example.recette.bean.Recette;
 import com.example.recette.dao.RecetteDao;
 import com.example.recette.required.UserRequired;
@@ -19,8 +18,6 @@ import java.util.stream.Collectors;
 public class RecetteServiceImpl implements RecetteService {
     @Autowired
     private UserRequired userRequired;
-    @Autowired
-    private ImageService imageService;
     @Autowired
     private RecetteDao recetteDao;
     @Autowired
@@ -74,22 +71,7 @@ public class RecetteServiceImpl implements RecetteService {
 @Override
     public int save1(Recette recette, List<MultipartFile> imageFiles) {
         if (recetteDao.findByRef(recette.getRef()) != null) {
-            if (imageFiles != null) {
-                List<Image> images = imageFiles.stream()
-                        .map(file -> {
-                            try {
-                                return Image.builder()
-                                        .name(file.getOriginalFilename())
-                                        .imageData(ImageUtil.compressImage(file.getBytes()))
-                                        .build();
-                            } catch (IOException e) {
-                                throw new RuntimeException(e);
-                            }
-                        })
-                        .collect(Collectors.toList());
 
-                recette.setImages(images);
-            }
 
             if (recette.getIngredients() != null) {
                 recette.getIngredients().forEach(ingredient -> ingredientService.save(ingredient));
@@ -116,7 +98,6 @@ public class RecetteServiceImpl implements RecetteService {
             r.setDuree(recette.getDuree());
             r.setDescription(recette.getDescription());
             r.setUserRef(recette.getUserRef());
-            r.setImages(recette.getImages());
             r.setDate_publication(recette.getDate_publication());
             r.setIngredients(recette.getIngredients());
             r.setEtapes(recette.getEtapes());

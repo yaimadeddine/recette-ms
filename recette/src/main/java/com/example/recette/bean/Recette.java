@@ -21,8 +21,8 @@ public class Recette {
     private int duree;
     private Date date_publication;
     private String userRef;
-    @OneToMany
-    private List<Image> images;
+    private String image;
+
     @OneToMany
     List<Ingredient> ingredients;
     @OneToMany
