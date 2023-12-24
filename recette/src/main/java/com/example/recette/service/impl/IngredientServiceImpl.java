@@ -14,8 +14,7 @@ import java.util.List;
 public class IngredientServiceImpl implements IngredientService {
     @Autowired
     private IngredientDao ingredientDao;
-    @Autowired
-    private RecetteService recetteService;
+
 
     @Override
     public int deleteByRef(String ref) {
@@ -29,12 +28,6 @@ public class IngredientServiceImpl implements IngredientService {
         return 1;
     }
 
-    @Override
-    public List<Ingredient> findAllByRecetteRef(String recetteRef) {
-        if (recetteService.findByRef(recetteRef)!=null){
-            return ingredientDao.findAllByRecetteRef(recetteRef);
-        }else return null;
-    }
 
     @Override
     public int update(Ingredient ingredient) {

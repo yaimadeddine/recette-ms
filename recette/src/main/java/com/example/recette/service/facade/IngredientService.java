@@ -10,7 +10,6 @@ public interface IngredientService {
 
     int save(Ingredient ingredient);
 
-    List<Ingredient> findAllByRecetteRef(String recetteRef);
 
     int update(Ingredient ingredient);
 }

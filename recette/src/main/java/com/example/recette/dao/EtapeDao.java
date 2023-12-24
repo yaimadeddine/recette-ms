@@ -1,13 +1,11 @@
 package com.example.recette.dao;
 
-import com.example.recette.bean.Ingredient;
-import com.example.recette.bean.Recette;
+import com.example.recette.bean.Etape;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
-
 @Repository
-public interface IngredientDao extends JpaRepository<Ingredient,Integer> {
+public interface EtapeDao  extends JpaRepository<Etape,Integer> {
     int deleteByRef(String ref);
+
 }
