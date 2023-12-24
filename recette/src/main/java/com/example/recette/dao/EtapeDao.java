@@ -6,6 +6,8 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface EtapeDao extends JpaRepository<Etape, Long> {
+    Etape findByRef(String ref);
+
     int deleteByRef(String ref);
 }
 
