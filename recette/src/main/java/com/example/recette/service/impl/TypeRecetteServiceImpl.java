@@ -40,6 +40,8 @@ public class TypeRecetteServiceImpl implements TypeRecetteService {
             tr.setId(typeRecette.getId());
             tr.setRef(typeRecette.getRef());
             tr.setLibelle(typeRecette.getLibelle());
+            tr.setImage(typeRecette.getImage());
+
             typeRecetteDao.save(tr);
             return 1;
         }

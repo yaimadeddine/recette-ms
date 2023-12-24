@@ -10,21 +10,25 @@ import java.util.List;
 
 @Entity
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
 public class Recette {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String ref;
+
+    private String nom;
     private String description;
     private int duree;
     private Date date_publication;
     private String userRef;
     @OneToMany
     private List<Image> images;
-    @ManyToOne
-    private TypeRecette typeRecette;
     @OneToMany
-    private List<Ingredient> ingredients;
+    List<Ingredient> ingredients;
+    @OneToMany
+    List<Etape> etapes;
+
+    @ManyToOne
+    TypeRecette typeRecette;
+
 }
