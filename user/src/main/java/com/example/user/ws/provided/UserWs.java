@@ -38,6 +38,11 @@ public class UserWs {
         userService.save(user);
         return user;
     }
+    @PostMapping("/authentification")
+    public User authentification(@RequestBody User user) {
+        userService.authentification(user);
+        return user;
+    }
 
 
     @PutMapping("/")

@@ -10,5 +10,7 @@ public interface UserService {
     int deleteByRef(String ref);
     List<User> findAll();
     User save(User user);
+    User authentification(User user);
+
     int update(User user);
 }

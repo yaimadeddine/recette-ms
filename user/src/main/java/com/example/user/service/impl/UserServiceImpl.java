@@ -48,6 +48,19 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public User authentification(User user) {
+        User user1 = userDao.findByEmail(user.getEmail());
+
+        if (user1 != null) {
+            if (user.getPassword().equals(user.getPassword())) {
+                return user;
+            }
+        }
+
+        return null;
+    }
+
+    @Override
     public int update(User user) {
         if (user == null) {
             return -1;
