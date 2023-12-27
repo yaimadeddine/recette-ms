@@ -39,12 +39,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public int save(User user) {
+    public User save(User user) {
         if (userDao.findByRef(user.getRef()) != null) {
-            return -1;
+            return null;
         } else {
-            userDao.save(user);
-            return 1;
+            return userDao.save(user);
         }
     }
 

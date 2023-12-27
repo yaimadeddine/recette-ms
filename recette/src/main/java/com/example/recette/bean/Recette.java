@@ -15,7 +15,6 @@ public class Recette {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String ref;
-
     private String nom;
     private String description;
     private int duree;

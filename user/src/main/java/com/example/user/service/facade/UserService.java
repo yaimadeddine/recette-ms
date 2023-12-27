@@ -9,6 +9,6 @@ public interface UserService {
     User findByEmail(String email);
     int deleteByRef(String ref);
     List<User> findAll();
-    int save(User user);
+    User save(User user);
     int update(User user);
 }
