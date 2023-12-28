@@ -5,6 +5,7 @@ import com.example.recette.dao.RecetteDao;
 
 import com.example.recette.service.facade.TypeRecetteService;
 import com.example.recette.service.impl.RecetteServiceImpl;
+import com.example.recette.vo.ResponseEntity;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -87,7 +88,7 @@ public class RecetteServiceImpTest {
         Recette recette2 = new Recette();
         recetteDao.save(recette2);
 
-        List<Recette> recettes = recetteService.findAll();
+        List<ResponseEntity> recettes = recetteService.findAll();
         assertNotNull(recettes);
         assertEquals(4, recettes.size());
     }

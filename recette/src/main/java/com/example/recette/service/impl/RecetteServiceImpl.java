@@ -5,12 +5,15 @@ import com.example.recette.dao.RecetteDao;
 import com.example.recette.required.UserRequired;
 import com.example.recette.service.facade.*;
 import com.example.recette.util.ImageUtil;
+import com.example.recette.vo.ResponseEntity;
+import com.example.recette.vo.UserVo;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -44,8 +47,16 @@ public class RecetteServiceImpl implements RecetteService {
     }
 
     @Override
-    public List<Recette> findAll() {
-        return recetteDao.findAll();
+    public List<ResponseEntity> findAll() {
+        List<ResponseEntity> responseEntities = new ArrayList<>();
+        List<Recette> recettes = recetteDao.findAll();
+
+        for (Recette recette : recettes) {
+            UserVo userVo = userRequired.findByRef(recette.getUserRef());
+            responseEntities.add(new ResponseEntity(recette, userVo));
+        }
+
+        return responseEntities;
     }
 
     @Override

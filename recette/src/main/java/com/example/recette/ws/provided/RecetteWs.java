@@ -2,6 +2,7 @@ package com.example.recette.ws.provided;
 
 import com.example.recette.bean.Recette;
 import com.example.recette.service.facade.RecetteService;
+import com.example.recette.vo.ResponseEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -30,7 +31,7 @@ public class RecetteWs {
     }
 
     @GetMapping("/")
-    public List<Recette> findAll() {
+    public List<ResponseEntity> findAll() {
         return recetteService.findAll();
     }
 

@@ -52,11 +52,10 @@ public class UserServiceImpl implements UserService {
         User user1 = userDao.findByEmail(user.getEmail());
 
         if (user1 != null) {
-            if (user.getPassword().equals(user.getPassword())) {
-                return user;
+            if (user1.getPassword().equals(user.getPassword())) {
+                return user1;
             }
         }
-
         return null;
     }
 
