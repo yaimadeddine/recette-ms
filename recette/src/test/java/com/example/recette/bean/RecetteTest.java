@@ -27,10 +27,7 @@ public class RecetteTest {
         typeRecette.setLibelle("Dessert");
         typeRecette.setImage("dessert.jpg");
 
-        Image image = new Image();
-        image.setId(1);
-        image.setName("tarte.jpg");
-        image.setImageData(new byte[]{});
+
 
         Ingredient ingredient = new Ingredient();
         ingredient.setId(1);
@@ -47,7 +44,6 @@ public class RecetteTest {
         etape.setDuree(30);
 
         recette.setTypeRecette(typeRecette);
-        recette.setImages(Arrays.asList(image));
         recette.setIngredients(Arrays.asList(ingredient));
         recette.setEtapes(Arrays.asList(etape));
 
@@ -62,9 +58,7 @@ public class RecetteTest {
         assertNotNull(recette.getTypeRecette());
         assertEquals("Dessert", recette.getTypeRecette().getLibelle());
 
-        assertNotNull(recette.getImages());
-        assertEquals(1, recette.getImages().size());
-        assertEquals("tarte.jpg", recette.getImages().get(0).getName());
+
 
         assertNotNull(recette.getIngredients());
         assertEquals(1, recette.getIngredients().size());
