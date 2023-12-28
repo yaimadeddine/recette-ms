@@ -1,6 +1,4 @@
 package com.example.recette.service.facade;
-
-import com.example.recette.bean.Recette;
 import com.example.recette.bean.TypeRecette;
 
 import java.util.List;
