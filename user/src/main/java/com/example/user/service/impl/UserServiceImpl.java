@@ -19,10 +19,7 @@ public class UserServiceImpl implements UserService {
         return userDao.findByRef(ref);
     }
 
-    @Override
-    public User findByEmail(String email) {
-        return userDao.findByEmail(email);
-    }
+
 
     @Override
     @Transactional
@@ -46,18 +43,21 @@ public class UserServiceImpl implements UserService {
             return userDao.save(user);
         }
     }
-
     @Override
     public User authentification(User user) {
-        User user1 = userDao.findByEmail(user.getEmail());
+        List<User> users = userDao.findByEmail(user.getEmail());
 
-        if (user1 != null) {
-            if (user1.getPassword().equals(user.getPassword())) {
-                return user1;
+        if (!users.isEmpty()) {
+            for (User user1:users){
+                if (user1.getPassword().equals(user.getPassword())) {
+                    return user1;
+                }
             }
+
         }
         return null;
     }
+
 
     @Override
     public int update(User user) {

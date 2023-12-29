@@ -19,10 +19,6 @@ public class UserWs {
         return userService.findByRef(ref);
     }
 
-    @GetMapping("/email/{email}")
-    public User findByEmail(@PathVariable String email) {
-        return userService.findByEmail(email);
-    }
 
     @DeleteMapping("/ref/{ref}")
     public int deleteByRef(@PathVariable String ref) {
@@ -40,8 +36,8 @@ public class UserWs {
     }
     @PostMapping("/authentification")
     public User authentification(@RequestBody User user) {
-        userService.authentification(user);
-        return user;
+
+        return userService.authentification(user);
     }
 
 

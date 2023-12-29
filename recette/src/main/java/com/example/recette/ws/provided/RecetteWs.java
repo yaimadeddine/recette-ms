@@ -21,7 +21,7 @@ public class RecetteWs {
     }
 
     @GetMapping("/user-id/{userRef}")
-    public List<Recette> findByUserId(@PathVariable String userRef) {
+    public List<ResponseEntity> findByUserId(@PathVariable String userRef) {
         return recetteService.findByUserRef(userRef);
     }
 
