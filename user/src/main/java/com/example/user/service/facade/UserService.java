@@ -6,7 +6,6 @@ import java.util.List;
 
 public interface UserService {
     User findByRef(String ref);
-    User findByEmail(String email);
     int deleteByRef(String ref);
     List<User> findAll();
     User save(User user);

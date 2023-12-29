@@ -1,44 +1,18 @@
 server:
   port: 8888
-
 spring:
   application:
-    name: Gateway
+    name: API-GATEWAY
   cloud:
-    discovery:
-      enabled: true
     gateway:
+      default-filters:
+        - DedupeResponseHeader=Access-Control-Allow-Credentials Access-Control-Allow-Origin
       globalcors:
-        add-to-simple-url-handler-mapping: true
         corsConfigurations:
           '[/**]':
-            allowedOrigins: "http://localhost:8030"
-            allowedHeaders:
-              - "Origin"
-              - "Content-Type"
-              - "Accept"
-              - "Authorization"
-              - "Referer"
-            allowedMethods:
-              - POST
-              - GET
-              - OPTIONS
-      routes:
-        - id: user-ms-route
-          uri: http://localhost:8030
-          predicates:
-            - Path=/api/user/**
-          filters:
-            - RewritePath=/api/user/(?<remaining>.*), /$\{remaining}
-        - id: recette-ms-route
-          uri: http://localhost:8091
-          predicates:
-            - Path=/api/recette/**
-          filters:
-            - RewritePath=/recette/v1/(?<remaining>.*), /$\{remaining}
-
+            allowedOrigins: "*"
+            allowedMethods: "*"
+            allowedHeaders: "*"
 eureka:
   instance:
     hostname: localhost
-
-

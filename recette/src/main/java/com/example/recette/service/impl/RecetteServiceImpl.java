@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -33,8 +34,15 @@ public class RecetteServiceImpl implements RecetteService {
     }
 
     @Override
-    public List<Recette> findByUserRef(String userRef) {
-        return recetteDao.findByUserRef(userRef);
+    public List<ResponseEntity> findByUserRef(String userRef) {
+        List<ResponseEntity> responseEntities = new ArrayList<>();
+        List<Recette> recettes = recetteDao.findByUserRef(userRef);
+        for (Recette recette : recettes) {
+            UserVo userVo = userRequired.findByRef(recette.getUserRef());
+            responseEntities.add(new ResponseEntity(recette, userVo));
+        }
+
+        return responseEntities;
     }
 
     @Override
@@ -58,23 +66,10 @@ public class RecetteServiceImpl implements RecetteService {
 
     @Override
     public int save(Recette recette) {
-        if (recetteDao.findByRef(recette.getRef()) != null) {
-//            if (recette.getImages() != null) {
-//                recette.getImages().stream().forEach(image -> imageService.save(image));
-//            }
-            if (recette.getIngredients() != null) {
-                recette.getIngredients().stream().map(ingredient -> ingredientService.save(ingredient));
-            }
-            if (recette.getEtapes() != null) {
-                recette.getEtapes().forEach(etape -> etapeService.save(etape));
-            }
 
-            if (userRequired.findByRef(recette.getUserRef()) != null) {
-                recetteDao.save(recette);
-            }
-            return 1;
-        }
-        return -1;
+        recetteDao.save(recette);
+        return 1;
+
     }
 @Override
     public int save1(Recette recette, List<MultipartFile> imageFiles) {
@@ -106,9 +101,11 @@ public class RecetteServiceImpl implements RecetteService {
             r.setDuree(recette.getDuree());
             r.setDescription(recette.getDescription());
             r.setUserRef(recette.getUserRef());
-            r.setDate_publication(recette.getDate_publication());
+            r.setDate_publication(new Date());
             r.setIngredients(recette.getIngredients());
             r.setEtapes(recette.getEtapes());
+            r.setNom(recette.getNom());
+            r.setImage(recette.getImage());
 
             r.setTypeRecette(recette.getTypeRecette());
             recetteDao.save(r);

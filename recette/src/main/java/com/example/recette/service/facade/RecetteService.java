@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface RecetteService {
     Recette findByRef(String ref);
-    List<Recette> findByUserRef(String userRef);
+    List<ResponseEntity> findByUserRef(String userRef);
     int deleteByRef(String ref);
     List<ResponseEntity> findAll();
     int save(Recette recette);
