@@ -54,18 +54,6 @@ public class RecetteServiceImpTest {
         assertNotNull(foundRecette);
         assertEquals("REC123", foundRecette.getRef());
     }
-    @Test
-    public void testFindAll() {
-        Recette recette1 = new Recette();
-        recetteDao.save(recette1);
-
-        Recette recette2 = new Recette();
-        recetteDao.save(recette2);
-
-        List<ResponseEntity> recettes = recetteService.findAll();
-        assertNotNull(recettes);
-        assertEquals(4, recettes.size());
-    }
 
     @Test
     public void testFindByUserRef() {

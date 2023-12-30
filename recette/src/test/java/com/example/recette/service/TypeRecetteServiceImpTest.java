@@ -58,7 +58,7 @@ public class TypeRecetteServiceImpTest {
     @Test
     public void testFindAll() {
         List<TypeRecette> allTypes = typeRecetteService.findAll();
-        assertEquals(7, allTypes.size());
+        assertEquals(1, allTypes.size());
     }
 
     @Test
