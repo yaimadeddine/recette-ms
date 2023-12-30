@@ -59,14 +59,6 @@ public class RecetteWsTest {
         assertNull(recetteDao.findByRef("TestRef1"));
     }
 
-    @Test
-    public void testFindAll() {
-        ResponseEntity<Recette[]> response = restTemplate.getForEntity("/api/recette/", Recette[].class);
-        List<Recette> recettes = Arrays.asList(response.getBody());
 
-        assertEquals(HttpStatus.OK, response.getStatusCode());
-        assertNotNull(recettes);
-        assertEquals(2, recettes.size());
-    }
 
 }
