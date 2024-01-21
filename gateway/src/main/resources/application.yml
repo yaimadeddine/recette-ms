@@ -4,6 +4,9 @@ spring:
   application:
     name: API-GATEWAY
   cloud:
+    consul:
+      config:
+        enabled: false
     gateway:
       default-filters:
         - DedupeResponseHeader=Access-Control-Allow-Credentials Access-Control-Allow-Origin

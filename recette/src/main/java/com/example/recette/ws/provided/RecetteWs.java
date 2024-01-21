@@ -41,8 +41,8 @@ public class RecetteWs {
     }
 
     @PostMapping("/save")
-    public int save1(@RequestBody Recette recette, List<MultipartFile> imageFiles) {
-        return recetteService.save1(recette, imageFiles);
+    public int save1(@RequestBody Recette recette) {
+        return recetteService.save1(recette);
     }
 
     @PutMapping("/")

@@ -12,7 +12,7 @@ public interface RecetteService {
     int deleteByRef(String ref);
     List<ResponseEntity> findAll();
     int save(Recette recette);
-    int save1(Recette recette,List<MultipartFile> imageFiles);
+    int save1(Recette recette);
     int update(Recette recette);
     List<Recette> findAllByTypeRecetteRef(String ref);
 

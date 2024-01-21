@@ -66,23 +66,21 @@ public class RecetteServiceImpl implements RecetteService {
 
     @Override
     public int save(Recette recette) {
-
+        recette.getIngredients().forEach(ingredient -> ingredientService.save(ingredient));
+        recette.getEtapes().forEach(etape -> etapeService.save(etape));
         recetteDao.save(recette);
         return 1;
-
     }
-@Override
-    public int save1(Recette recette, List<MultipartFile> imageFiles) {
+
+    @Override
+    public int save1(Recette recette) {
         if (recetteDao.findByRef(recette.getRef()) != null) {
-
-
             if (recette.getIngredients() != null) {
                 recette.getIngredients().forEach(ingredient -> ingredientService.save(ingredient));
             }
             if (recette.getEtapes() != null) {
                 recette.getEtapes().forEach(etape -> etapeService.save(etape));
             }
-
             if (userRequired.findByRef(recette.getUserRef()) != null) {
                 recetteDao.save(recette);
             }
